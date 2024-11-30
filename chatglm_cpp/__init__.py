@@ -3,6 +3,14 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, Iterator, List, Optional, Union
 
+import sys
+if sys.version_info >= (3, 8) and sys.platform == "win32":
+    import os
+    if os.environ.get('CUDA_PATH') is not None:
+        os.add_dll_directory(os.environ['CUDA_PATH'] + '/bin')
+
+import chatglm_cpp._C as _C
+
 import chatglm_cpp._C as _C
 from chatglm_cpp._C import ChatMessage, Image
 
